@@ -1,0 +1,38 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo
+  labels:
+    app.kubernetes.io/component: echo
+    app.kubernetes.io/instance: insta
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: echo
+      app.kubernetes.io/instance: insta
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: echo
+        app.kubernetes.io/instance: insta
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: echo
+          image: kennethreitz/httpbin
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            periodSeconds: 1
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            periodSeconds: 1
+            httpGet:
+              path: /
+              port: http
