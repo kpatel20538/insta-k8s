@@ -27,12 +27,12 @@ spec:
           livenessProbe:
             periodSeconds: 1
             httpGet:
-              path: /
+              path: /get
               port: http
           readinessProbe:
             periodSeconds: 1
             httpGet:
-              path: /
+              path: /get
               port: http
 ---
 apiVersion: v1
