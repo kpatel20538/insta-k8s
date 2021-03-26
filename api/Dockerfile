@@ -1,4 +1,4 @@
-FROM php:7.4-cli-alpine AS cli
+FROM php:7.4-cli-alpine AS admin
 
 RUN apk add --no-cache \
   freetype libjpeg-turbo libpng libxpm libwebp \
@@ -20,7 +20,7 @@ COPY . ./
 
 ENTRYPOINT ["./bin/admin.php"]
 
-FROM php:7.4-fpm-alpine AS fpm
+FROM php:7.4-fpm-alpine AS api
 
 RUN apk add --no-cache \
   freetype libjpeg-turbo libpng libxpm libwebp \
