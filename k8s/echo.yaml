@@ -23,9 +23,7 @@ spec:
         - name: echo
           image: kennethreitz/httpbin
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
+            - containerPort: 80
           livenessProbe:
             periodSeconds: 1
             httpGet:
@@ -36,3 +34,17 @@ spec:
             httpGet:
               path: /
               port: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo
+  labels:
+    app.kubernetes.io/instance: insta
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app.kubernetes.io/name: echo
+    app.kubernetes.io/instance: insta
