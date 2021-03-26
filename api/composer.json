@@ -1,0 +1,15 @@
+{
+    "name": "kpatel20538/insta-api",
+    "type": "project",
+    "require": {
+        "slim/slim": "^4.7",
+        "slim/psr7": "^1.3",
+        "mnapoli/silly": "^1.7"
+    },
+    "authors": [
+        {
+            "name": "Kishan Patel",
+            "email": "kpatel20538@gmail.com"
+        }
+    ]
+}
