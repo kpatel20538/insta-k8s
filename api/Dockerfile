@@ -6,7 +6,7 @@ RUN apk add --no-cache \
 RUN docker-php-ext-configure \
   gd --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype
 RUN docker-php-ext-install \
-  pdo_mysql json gd mbstring
+  pdo_mysql json gd
 RUN apk del \
   freetype-dev libjpeg-turbo-dev libpng-dev libxpm-dev libwebp-dev
 
@@ -28,7 +28,7 @@ RUN apk add --no-cache \
 RUN docker-php-ext-configure \
   gd --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype
 RUN docker-php-ext-install \
-  pdo_mysql json gd mbstring
+  pdo_mysql json gd
 RUN apk del \
   freetype-dev libjpeg-turbo-dev libpng-dev libxpm-dev libwebp-dev
 
