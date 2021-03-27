@@ -10,11 +10,11 @@ spec:
   rules:
     - http:
         paths:
-          - path: /api
+          - path: /
             backend:
               serviceName: api-service
               servicePort: 80
-          - path: /
+          - path: /anything
             backend:
               serviceName: echo-service
               servicePort: 80
