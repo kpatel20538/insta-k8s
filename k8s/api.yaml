@@ -79,23 +79,26 @@ spec:
             - name: api-volume-config
               mountPath: /etc/nginx/conf.d
           livenessProbe:
-            periodSeconds: 1
             httpGet:
               path: /health
               port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
           readinessProbe:
-            periodSeconds: 1
             httpGet:
               path: /health
               port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
       volumes:
         - name: api-volume-code
           emptyDir: {}
         - name: api-volume-config
-          configMap: api-config-map
-          items:
-            - key: nginx-config
-              path: default.conf
+          configMap: 
+            name: api-config-map
+            items:
+              - key: nginx-config
+                path: default.conf
 ---
 apiVersion: v1
 kind: Service
