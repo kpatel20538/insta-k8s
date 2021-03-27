@@ -32,6 +32,7 @@ RUN docker-php-ext-install \
 RUN apk del \
   freetype-dev libjpeg-turbo-dev libpng-dev libxpm-dev libwebp-dev
 
+WORKDIR /var/www
 COPY ./composer.json ./composer.lock ./
 COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
 RUN composer install
