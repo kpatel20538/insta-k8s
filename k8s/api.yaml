@@ -61,7 +61,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["cp", "-r", "/app", "/var/www"]
+                command: ["cp", "-r", "/app/*", "/var/www"]
         - name: api-container-nginx
           image: nginx:1.19.6-alpine
           ports:
