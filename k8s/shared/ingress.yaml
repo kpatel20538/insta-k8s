@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: insta
+  name: shared-ingress
   labels:
     app.kubernetes.io/instance: insta
   annotations:
@@ -10,11 +10,11 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /api
             backend:
               serviceName: api-service
               servicePort: 80
-          - path: /anything
+          - path: /
             backend:
               serviceName: echo-service
               servicePort: 80
