@@ -47,36 +47,36 @@ spec:
         app.kubernetes.io/instance: insta
     spec:
       containers:
-        - name: database-container
-          image: mysql:8.0
-          env:
-            - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: shared-config-map
-                  key: mysqlDatabase
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: shared-secret
-                  key: mysqlRootPassword
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: shared-secret
-                  key: mysqlUsername
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: shared-secret
-                  key: mysqlPassword
-          ports:
-            - name: mysql
-              containerPort: 3306
-          volumeMounts:
-            - name: database-volume
-              mountPath: /var/lib/mysql
-        volumes:
+      - name: database-container
+        image: mysql:8.0
+        env:
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: shared-config-map
+                key: mysqlDatabase
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: shared-secret
+                key: mysqlRootPassword
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: shared-secret
+                key: mysqlUsername
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: shared-secret
+                key: mysqlPassword
+        ports:
+          - name: mysql
+            containerPort: 3306
+        volumeMounts:
           - name: database-volume
-            persistentVolumeClaim:
-              claimName: database-pvc
+            mountPath: /var/lib/mysql
+      volumes:
+        - name: database-volume
+          persistentVolumeClaim:
+            claimName: database-pvc
