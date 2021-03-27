@@ -58,16 +58,6 @@ spec:
           volumeMounts:
             - name: api-volume-code
               mountPath: /var/www
-          livenessProbe:
-            tcpSocket:
-              port: fastcgi
-            initialDelaySeconds: 15
-            periodSeconds: 20
-          readinessProbe:  
-            tcpSocket:
-              port: fastcgi
-            initialDelaySeconds: 5
-            periodSeconds: 10
         - name: api-container-nginx
           image: nginx:1.19.6-alpine
           ports:
