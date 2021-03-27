@@ -68,18 +68,6 @@ spec:
               mountPath: /var/www
             - name: api-volume-config
               mountPath: /etc/nginx/conf.d
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: 15
-            periodSeconds: 20
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: 5
-            periodSeconds: 10
       volumes:
         - name: api-volume-code
           emptyDir: {}
