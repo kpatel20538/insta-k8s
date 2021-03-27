@@ -9,12 +9,12 @@ metadata:
 spec:
   rules:
     - http:
-      paths:
-        - path: /api
-          backend:
-            serviceName: api-service
-            servicePort: 80
-        - path: /
-          backend:
-            serviceName: echo-service
-            servicePort: 80
+        paths:
+          - path: /api
+            backend:
+              serviceName: api-service
+              servicePort: 80
+          - path: /
+            backend:
+              serviceName: echo-service
+              servicePort: 80
