@@ -13,4 +13,9 @@ $app->get('/api/{name}', function (Request $request, Response $response, array $
     return $response;
 });
 
+$app->get('/health', function (Request $request, Response $response) {
+    $response->getBody()->write("ok");
+    return $response;
+});
+
 $app->run();

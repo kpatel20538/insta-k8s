@@ -8,9 +8,13 @@ metadata:
     dev.okteto.com/generate-host: "true"
 spec:
   rules:
-  - http:
-    paths:
-    - path: /
-      backend:
-        serviceName: echo
-        servicePort: 80
+    - http:
+      paths:
+        - path: /api
+          backend:
+            serviceName: api-service
+            servicePort: 80
+        - path: /
+          backend:
+            serviceName: echo-service
+            servicePort: 80

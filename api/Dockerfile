@@ -18,7 +18,7 @@ RUN rm /usr/bin/composer
 
 COPY . ./
 
-ENTRYPOINT ["./bin/admin.php"]
+ENTRYPOINT ["php", "./bin/admin.php"]
 
 FROM php:7.4-fpm-alpine AS api
 
