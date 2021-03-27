@@ -58,6 +58,10 @@ spec:
           volumeMounts:
             - name: api-volume-code
               mountPath: /var/www
+          lifecycle:
+            postStart:
+              exec:
+                command: ["cp", "-r", "/app", "/var/www"]
         - name: api-container-nginx
           image: nginx:1.19.6-alpine
           ports:
