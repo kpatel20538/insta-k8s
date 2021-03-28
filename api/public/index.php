@@ -12,35 +12,36 @@ use Slim\Factory\AppFactory;
 require __DIR__ . '/../vendor/autoload.php';
 
 $builder = new DI\ContainerBuilder();
-$builder->addDefinitions([
-    LoggerInterface::class => function () {
-        $logger = new Logger("root");
-        $logger->pushHandler(new StreamHandler('php://stderr', Logger::ERROR));
-        $logger->pushHandler(new StreamHandler('php://stdout'));
-        return $logger;
-    },
-
-    'db.host' => 'database-service',
-    'db.dbname' => DI\env('MYSQL_DATABASE'),
-    'db.user' => DI\env('MYSQL_USER'),
-    'db.password' => DI\env('MYSQL_PASSWORD'),
-    'db.dsn' => DI\string('mysql://{db.user}:{db.password}@{db.host}/{db.dbname}'),
-    DBAL\Connection::class => function (ContainerInterface $container) {
-        return DBAL\DriverManager::getConnection(['url' => $container->get('db.dsn')]);
-    },
-]);
+$builder->addDefinitions(__DIR__ . '/../src/definitions/common.php');
 $container = $builder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$app->get('/api/{name}', function (Request $request, Response $response, array $args) use ($container) {
+$app->get('/api/sql', function (Request $request, Response $response) use ($container) {
     /** @var DBAL\Connection */
     $connection = $container->get(DBAL\Connection::class);
     
     $value = $connection->fetchOne("SELECT NOW()");
-
-    $response->getBody()->write("Hello, $value");
+    
+    $response->getBody()->write("Sql, $value");
     return $response;
+});
+
+$app->get('/api/redis', function (Request $request, Response $response) use ($container) {
+    /** @var Predis\ClientInterface */
+    $client = $container->get(Predis\ClientInterface::class);
+    
+    $value = $client->incr("counter");
+    
+    $response->getBody()->write("Redis, $value");
+    return $response;
+});
+
+$app->get('/api/di', function (Request $request, Response $response) {    
+    $value = glob(__DIR__ . '/../src/definitions/*.php');
+    
+    $response->getBody()->write(json_encode($value));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/health', function (Request $request, Response $response) {
