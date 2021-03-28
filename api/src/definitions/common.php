@@ -32,7 +32,7 @@ return [
     return new Predis\Client($container->get('session.dsn'));
   },
   
-  'storage.host' => 'storage-service',
+  'storage.host' => 'https://insta-kpatel20538.cloud.okteto.net',
   'storage.key' => DI\env('MINIO_ROOT_USER'),
   'storage.secret' => DI\env('MINIO_ROOT_PASSWORD'),
   S3ClientInterface::class => function (ContainerInterface $container) {
