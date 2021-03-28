@@ -69,4 +69,4 @@ spec:
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
-            claimname: storage-pvc
+            claimName: storage-pvc
