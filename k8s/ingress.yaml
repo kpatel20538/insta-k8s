@@ -16,5 +16,5 @@ spec:
               servicePort: 80
           - path: /
             backend:
-              serviceName: echo-service
+              serviceName: frontend-service
               servicePort: 80
