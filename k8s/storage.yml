@@ -49,6 +49,7 @@ spec:
       containers:
       - name: storage-container
         image: minio/minio
+        command: ['minio', 'server', '/data']
         env:
           - name: MINIO_ROOT_USER
             valueFrom:
