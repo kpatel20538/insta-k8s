@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        image: [ "frontend" ]
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Login to GitHub Container Repository
         uses: docker/login-action@v1 
         with:
@@ -28,9 +28,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./frontend
-          target: ${{ matrix.image }}
+          target: prod
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/insta-${{ matrix.image }}
+          tags: ghcr.io/${{ github.repository_owner }}/insta-frontend
       
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
