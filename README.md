@@ -7,8 +7,8 @@ Built with Okteto, A Kubernetes Service Provider.
 
 ## Infrastrucure Components
  - [x] **api**: [php:7.4-fpm-alpine](https://hub.docker.com/_/php) + [nginx:1.19-alpine](https://hub.docker.com/_/nginx) 
- - [ ] **database**: [mysql:8.0](https://hub.docker.com/_/mysql)
- - [ ] **frontend**: [node:14.16-alpine](https://hub.docker.com/_/node) + [nginx:1.19-alpine](https://hub.docker.com/_/nginx)
+ - [x] **database**: [mysql:8.0](https://hub.docker.com/_/mysql)
+ - [x] **frontend**: [node:14.16-alpine](https://hub.docker.com/_/node) + [nginx:1.19-alpine](https://hub.docker.com/_/nginx)
  - [ ] **session**: [redis:6.2-alpine](https://hub.docker.com/_/redis)
  - [ ] **worker**: [php:7.4-cli-alpine](https://hub.docker.com/_/php) + [schickling/beanstalkd](https://hub.docker.com/r/schickling/beanstalkd) (Worker + Work Queue)
  - [ ] **storage**: [minio/minio](https://hub.docker.com/r/minio/minio) (S3-like Storage)
