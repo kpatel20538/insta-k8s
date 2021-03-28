@@ -95,7 +95,7 @@ spec:
             - name: api-volume-code
               mountPath: /var/www
         - name: api-container-nginx
-          image: nginx:1.19.8-alpine
+          image: nginx:1.19-alpine
           ports:
             - name: http
               containerPort: 80
