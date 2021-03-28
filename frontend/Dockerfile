@@ -3,8 +3,8 @@ FROM node:14.16-alpine AS build
 WORKDIR /app
 COPY ./package.json ./package-lock.json ./
 RUN npm ci
-RUN npm run build
 COPY . ./
+RUN npm run build
 
 FROM nginx:1.19-alpine AS prod
 
