@@ -9,7 +9,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: http
+      targetPort: s3
   selector:
     app.kubernetes.io/name: minio
     app.kubernetes.io/instance: insta
@@ -62,8 +62,8 @@ spec:
                 name: shared-secret
                 key: minioRootPassword
         ports:
-          - name: http
-            containerPort: 80
+          - name: s3
+            containerPort: 9000
         volumeMounts:
           - name: storage-volume
             mountPath: /data
