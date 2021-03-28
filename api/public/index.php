@@ -54,7 +54,7 @@ $app->get('/api/minio/{key}', function (Request $request, Response $response, ar
         <script>
             document.querySelector('button')
                 .addEventListener('click', () => {
-                    fetch('$value', {
+                    fetch('/$value', {
                         method: 'PUT',
                         body: document.querySelector('input').files[0] 
                     })
