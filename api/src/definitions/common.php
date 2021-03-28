@@ -1,5 +1,7 @@
 <?php
 
+use Aws\S3\S3Client;
+use Aws\S3\S3ClientInterface;
 use Doctrine\DBAL;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -28,5 +30,21 @@ return [
   'session.dsn' => DI\string('redis://{session.host}:{session.port}'),
   Predis\ClientInterface::class => function(ContainerInterface $container) {
     return new Predis\Client($container->get('session.dsn'));
+  },
+  
+  'storage.host' => 'storage-service',
+  'storage.key' => DI\env('MINIO_ROOT_USER'),
+  'storage.secret' => DI\env('MINIO_ROOT_PASSWORD'),
+  S3ClientInterface::class => function (ContainerInterface $container) {
+    return new S3Client([
+      'version' => 'latest',
+      'region' => 'us-east-1',
+      'endpoint' => $container->get('storage.host'),
+      'use_path_style_endpoint' => true,
+      'credentials' => [
+        'key' => $container->get('storage.key'),
+        'secret' => $container->get('storage.secret'),
+      ],
+    ]);
   }
 ];

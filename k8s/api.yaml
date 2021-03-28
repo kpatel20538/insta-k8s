@@ -88,6 +88,16 @@ spec:
                 secretKeyRef:
                   name: shared-secret
                   key: mysqlPassword
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: shared-secret
+                  key: minioRootUsername
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: shared-secret
+                  key: minioRootPassword
           ports:
             - name: fastcgi
               containerPort: 9000
@@ -105,12 +115,12 @@ spec:
             - name: api-volume-config
               mountPath: /etc/nginx/conf.d
           livenessProbe:
-            periodSeconds: 30
+            periodSeconds: 5
             httpGet:
               path: /get
               port: http
           readinessProbe:
-            periodSeconds: 15
+            periodSeconds: 1
             httpGet:
               path: /get
               port: http
