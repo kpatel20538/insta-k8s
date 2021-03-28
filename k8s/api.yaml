@@ -105,12 +105,12 @@ spec:
             - name: api-volume-config
               mountPath: /etc/nginx/conf.d
           livenessProbe:
-            periodSeconds: 15
+            periodSeconds: 30
             httpGet:
               path: /get
               port: http
           readinessProbe:
-            periodSeconds: 5
+            periodSeconds: 15
             httpGet:
               path: /get
               port: http

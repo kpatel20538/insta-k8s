@@ -33,10 +33,6 @@ $container = $builder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-/** @var LoggerInterface */
-$logger = $container->get(LoggerInterface::class);
-$logger->info($container->get('db.dsn'));
-
 $app->get('/api/{name}', function (Request $request, Response $response, array $args) use ($container) {
     /** @var DBAL\Connection */
     $connection = $container->get(DBAL\Connection::class);
