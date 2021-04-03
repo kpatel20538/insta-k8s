@@ -82,7 +82,7 @@ data:
 
       location ~ /(libs|vendor|plugins|misc/user) {
         deny all;
-        return 403;
+        return 418;
       }
 
       ## properly display textfiles in root directory
