@@ -82,7 +82,7 @@ data:
 
       location ~ /(libs|vendor|plugins|misc/user) {
         deny all;
-        return 418;
+        return 403;
       }
 
       ## properly display textfiles in root directory
@@ -114,10 +114,6 @@ spec:
       containers:
         - name: analytics-container-php
           image: matomo:fpm-alpine
-          lifecycle:
-            postStart:
-              exec:
-                command: ["cp", "-r", "/var/www/.", "/mount/www"]
           env:
             - name: MATOMO_DATABASE_ADAPTER
               valueFrom:
@@ -149,15 +145,19 @@ spec:
               containerPort: 9000
           volumeMounts:
             - name: analytics-volume-code
-              mountPath: /mount/www
+              mountPath: /var/www
         - name: analytics-container-nginx
           image: nginx:1.19-alpine
+          lifecycle:
+            postStart:
+              exec:
+                command: ["cp", "-r", "/mount/www/.", "/var/www"]
           ports:
             - name: http
               containerPort: 80
           volumeMounts: 
             - name: analytics-volume-code
-              mountPath: /var/www
+              mountPath: /mount/www
             - name: analytics-volume-config
               mountPath: /etc/nginx/conf.d
       volumes:
