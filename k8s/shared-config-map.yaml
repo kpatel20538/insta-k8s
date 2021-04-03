@@ -4,3 +4,5 @@ metadata:
   name: shared-config-map
 data:
   mysqlDatabase: "database"
+  matomoDatabaseAdapter: "mysql"
+  matomoDatabaseTablesPrefix: "matomo_"

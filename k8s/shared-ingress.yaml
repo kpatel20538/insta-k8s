@@ -1,14 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: insta
+  name: shared-insta
   labels:
     app.kubernetes.io/instance: insta
-  annotations:
-    dev.okteto.com/generate-host: "true"
 spec:
   rules:
-    - http:
+    - host: api-kpatel20538.cloud.okteto.net
+      http:
         paths:
           - path: /uploads
             backend:
@@ -21,4 +20,11 @@ spec:
           - path: /
             backend:
               serviceName: frontend-service
+              servicePort: 80
+    - host: analytics-kpatel20538.cloud.okteto.net
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: analytics-service
               servicePort: 80
