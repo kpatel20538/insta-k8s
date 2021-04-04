@@ -36,6 +36,9 @@ spec:
       containers:
         - name: analytics-container-php
           image: matomo:4.2-apache
+          ports:
+            - name: http
+              containerPort: 80
           env:
             - name: MATOMO_DATABASE_ADAPTER
               valueFrom:
@@ -62,3 +65,13 @@ spec:
                 secretKeyRef:
                   name: shared-secret
                   key: mysqlPassword
+          livenessProbe:
+            periodSeconds: 5
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            periodSeconds: 1
+            httpGet:
+              path: /
+              port: http
