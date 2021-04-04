@@ -40,6 +40,8 @@ spec:
             - name: http
               containerPort: 80
           env:
+            - name: MATOMO_DATABASE_HOST
+              value: "database-service"
             - name: MATOMO_DATABASE_ADAPTER
               valueFrom:
                 configMapKeyRef:
